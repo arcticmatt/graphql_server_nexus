@@ -1,16 +1,16 @@
 import { queryField, stringArg } from "@nexus/schema";
 
-import Human from "../Human";
 import getHuman from "../../data/getHuman";
+import human from "../human";
 
 const humanQueryField = queryField("human", {
-  type: Human,
+  type: human,
   nullable: true,
   args: {
     id: stringArg({ description: "id of the human", nullable: false }),
   },
-  resolve(_root, args) {
-    return getHuman(args.id);
+  resolve(_root: unknown, { id }: { id: string }) {
+    return getHuman(id);
   },
 });
 

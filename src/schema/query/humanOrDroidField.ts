@@ -1,17 +1,18 @@
 import { arg, queryField } from "@nexus/schema";
 
-import HumanOrDroid from "../HumanOrDroid";
-import SumInput from "../SumInput";
+import { SumInput } from "../../data/types/SumInput";
 import { getHumanOrDroid } from "../../data/getHumanOrDroid";
+import humanOrDroid from "../humanOrDroid";
+import sumInput from "../sumInput";
 
 const humanOrDroidQueryField = queryField("humanOrDroid", {
-  type: HumanOrDroid,
+  type: humanOrDroid,
   nullable: true,
   args: {
-    input: arg({ type: SumInput, nullable: false }),
+    input: arg({ type: sumInput, nullable: false }),
   },
-  resolve(_root, args) {
-    return getHumanOrDroid(args.input);
+  resolve(_root: unknown, { input }: { input: SumInput }) {
+    return getHumanOrDroid(input);
   },
 });
 

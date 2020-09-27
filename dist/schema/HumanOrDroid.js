@@ -1,13 +1,13 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-const Droid_1 = require("./Droid");
-const Human_1 = require("./Human");
+const droid_1 = require("./droid");
+const human_1 = require("./human");
 const schema_1 = require("@nexus/schema");
-const HumanOrDroid = schema_1.unionType({
+const humanOrDroid = schema_1.unionType({
     name: "HumanOrDroid",
     definition(t) {
-        t.members(Human_1.default, Droid_1.default);
+        t.members(human_1.default, droid_1.default);
         t.resolveType((character) => character.type);
     },
 });
-exports.default = HumanOrDroid;
+exports.default = humanOrDroid;

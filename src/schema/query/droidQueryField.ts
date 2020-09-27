@@ -1,16 +1,18 @@
 import { queryField, stringArg } from "@nexus/schema";
 
-import Droid from "../Droid";
+import droid from "../droid";
 import { getDroid } from "../../data/getDroid";
 
 const droidQueryField = queryField("droid", {
-  type: Droid,
+  type: droid,
   nullable: true,
   args: {
     id: stringArg({ description: "id of the droid", nullable: false }),
   },
-  resolve(_root, args) {
-    return getDroid(args.id);
+  // AFAICT, _root and args should be automatically typed by GraphQL Nexus. But something
+  // is not working.
+  resolve(_root: unknown, { id }: { id: string }) {
+    return getDroid(id);
   },
 });
 

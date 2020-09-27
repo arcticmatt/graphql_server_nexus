@@ -1,9 +1,9 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-const Episode_1 = require("./Episode");
-const StarWarsData_1 = require("../StarWarsData");
+const episode_1 = require("./episode");
+const getFriends_1 = require("../data/getFriends");
 const schema_1 = require("@nexus/schema");
-const Character = schema_1.interfaceType({
+const character = schema_1.interfaceType({
     name: "Character",
     description: "A character in the Star Wars Trilogy",
     definition(t) {
@@ -14,16 +14,16 @@ const Character = schema_1.interfaceType({
         });
         t.field("friends", {
             description: "The friends of the character, or an empty list if they have none.",
-            type: Character,
+            type: character,
             list: [false],
             nullable: true,
             resolve: (character) => {
-                return StarWarsData_1.getFriends(character);
+                return getFriends_1.default(character);
             },
         });
         t.field("appearsIn", {
             description: "Which movies they appear in.",
-            type: Episode_1.default,
+            type: episode_1.default,
             list: [false],
             nullable: true,
         });
@@ -37,4 +37,4 @@ const Character = schema_1.interfaceType({
         t.resolveType((character) => character.type);
     },
 });
-exports.default = Character;
+exports.default = character;

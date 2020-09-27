@@ -1,13 +1,13 @@
-import Droid from "./Droid";
-import Human from "./Human";
+import droid from "./droid";
+import human from "./human";
 import { unionType } from "@nexus/schema";
 
-const HumanOrDroid = unionType({
+const humanOrDroid = unionType({
   name: "HumanOrDroid",
   definition(t) {
-    t.members(Human, Droid);
+    t.members(human, droid);
     t.resolveType((character) => character.type);
   },
 });
 
-export default HumanOrDroid;
+export default humanOrDroid;

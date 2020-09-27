@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const schema_1 = require("@nexus/schema");
-const Episode = schema_1.enumType({
+const episode = schema_1.enumType({
     name: "Episode",
     description: "One of the films in the Star Wars Trilogy",
     members: [
@@ -22,4 +22,4 @@ const Episode = schema_1.enumType({
         },
     ],
 });
-exports.default = Episode;
+exports.default = episode;

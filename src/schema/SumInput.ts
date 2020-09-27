@@ -1,6 +1,6 @@
 import { inputObjectType } from "@nexus/schema";
 
-const SumInput = inputObjectType({
+const sumInput = inputObjectType({
   name: "SumInput",
   definition(t) {
     t.int("one", { description: "An arbitrary integer." });
@@ -9,4 +9,4 @@ const SumInput = inputObjectType({
   },
 });
 
-export default SumInput;
+export default sumInput;

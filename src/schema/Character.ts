@@ -1,8 +1,8 @@
-import Episode from "./Episode";
+import episode from "./episode";
 import getFriends from "../data/getFriends";
 import { interfaceType } from "@nexus/schema";
 
-const Character = interfaceType({
+const character = interfaceType({
   name: "Character",
   description: "A character in the Star Wars Trilogy",
   definition(t) {
@@ -14,7 +14,7 @@ const Character = interfaceType({
     t.field("friends", {
       description:
         "The friends of the character, or an empty list if they have none.",
-      type: Character,
+      type: character,
       list: [false],
       nullable: true,
       resolve: (character) => {
@@ -23,7 +23,7 @@ const Character = interfaceType({
     });
     t.field("appearsIn", {
       description: "Which movies they appear in.",
-      type: Episode,
+      type: episode,
       list: [false],
       nullable: true,
     });
@@ -38,4 +38,4 @@ const Character = interfaceType({
   },
 });
 
-export default Character;
+export default character;

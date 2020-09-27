@@ -1,6 +1,6 @@
 import { enumType } from "@nexus/schema";
 
-const Episode = enumType({
+const episode = enumType({
   name: "Episode",
   description: "One of the films in the Star Wars Trilogy",
   members: [
@@ -22,4 +22,4 @@ const Episode = enumType({
   ],
 });
 
-export default Episode;
+export default episode;
