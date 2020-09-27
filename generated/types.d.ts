@@ -14,6 +14,11 @@ declare global {
 }
 
 export interface NexusGenInputs {
+  SumInput: { // input type
+    one?: number | null; // Int
+    three?: number | null; // Int
+    two?: number | null; // Int
+  }
 }
 
 export interface NexusGenEnums {
@@ -43,9 +48,11 @@ export interface NexusGenRootTypes {
   }
   Query: {};
   Character: NexusGenRootTypes['Droid'] | NexusGenRootTypes['Human'];
+  HumanOrDroid: NexusGenRootTypes['Droid'] | NexusGenRootTypes['Human'];
 }
 
 export interface NexusGenAllTypes extends NexusGenRootTypes {
+  SumInput: NexusGenInputs['SumInput'];
   Episode: NexusGenEnums['Episode'];
   String: NexusGenScalars['String'];
   Int: NexusGenScalars['Int'];
@@ -75,6 +82,7 @@ export interface NexusGenFieldTypes {
     droid: NexusGenRootTypes['Droid'] | null; // Droid
     hero: NexusGenRootTypes['Character'] | null; // Character
     human: NexusGenRootTypes['Human'] | null; // Human
+    humanOrDroid: NexusGenRootTypes['HumanOrDroid'] | null; // HumanOrDroid
   }
   Character: { // field return type
     appearsIn: Array<NexusGenEnums['Episode'] | null> | null; // [Episode]
@@ -96,10 +104,14 @@ export interface NexusGenArgTypes {
     human: { // args
       id: string; // String!
     }
+    humanOrDroid: { // args
+      input: NexusGenInputs['SumInput']; // SumInput!
+    }
   }
 }
 
 export interface NexusGenAbstractResolveReturnTypes {
+  HumanOrDroid: "Droid" | "Human"
   Character: "Droid" | "Human"
 }
 
@@ -107,7 +119,7 @@ export interface NexusGenInheritedFields {}
 
 export type NexusGenObjectNames = "Droid" | "Human" | "Query";
 
-export type NexusGenInputNames = never;
+export type NexusGenInputNames = "SumInput";
 
 export type NexusGenEnumNames = "Episode";
 
@@ -115,7 +127,7 @@ export type NexusGenInterfaceNames = "Character";
 
 export type NexusGenScalarNames = "Boolean" | "Float" | "ID" | "Int" | "String";
 
-export type NexusGenUnionNames = never;
+export type NexusGenUnionNames = "HumanOrDroid";
 
 export interface NexusGenTypes {
   context: any;

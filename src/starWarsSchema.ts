@@ -1,13 +1,21 @@
 import {
   arg,
   enumType,
+  inputObjectType,
   interfaceType,
   makeSchema,
   objectType,
   queryType,
   stringArg,
+  unionType,
 } from "@nexus/schema";
-import { getDroid, getFriends, getHero, getHuman } from "./StarWarsData";
+import {
+  getDroid,
+  getFriends,
+  getHero,
+  getHuman,
+  getHumanOrDroid,
+} from "./StarWarsData";
 
 const Episode = enumType({
   name: "Episode",
@@ -93,6 +101,23 @@ const Droid = objectType({
   },
 });
 
+const SumInput = inputObjectType({
+  name: "SumInput",
+  definition(t) {
+    t.int("one", { description: "An arbitrary integer." });
+    t.int("two", { description: "An arbitrary integer." });
+    t.int("three", { description: "An arbitrary integer." });
+  },
+});
+
+const HumanOrDroid = unionType({
+  name: "HumanOrDroid",
+  definition(t) {
+    t.members(Human, Droid);
+    t.resolveType((character) => character.type);
+  },
+});
+
 const Query = queryType({
   definition(t) {
     t.field("hero", {
@@ -122,7 +147,6 @@ const Query = queryType({
     t.field("droid", {
       type: Droid,
       nullable: true,
-
       args: {
         id: stringArg({ description: "id of the droid", nullable: false }),
       },
@@ -130,11 +154,21 @@ const Query = queryType({
         return getDroid(args.id);
       },
     });
+    t.field("humanOrDroid", {
+      type: HumanOrDroid,
+      nullable: true,
+      args: {
+        input: arg({ type: SumInput, nullable: false }),
+      },
+      resolve(_root, args) {
+        return getHumanOrDroid(args.input);
+      },
+    });
   },
 });
 
 const schema = makeSchema({
-  types: [Episode, Character, Human, Droid, Query],
+  types: [Query],
   outputs: {
     schema: `${__dirname}/../generated/schema.graphql`,
     typegen: `${__dirname}/../generated/types.d.ts`,

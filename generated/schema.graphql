@@ -74,6 +74,8 @@ type Human implements Character {
   secretBackstory: String
 }
 
+union HumanOrDroid = Droid | Human
+
 type Query {
   droid(
     """id of the droid"""
@@ -89,4 +91,16 @@ type Query {
     """id of the human"""
     id: String!
   ): Human
+  humanOrDroid(input: SumInput!): HumanOrDroid
+}
+
+input SumInput {
+  """An arbitrary integer."""
+  one: Int
+
+  """An arbitrary integer."""
+  three: Int
+
+  """An arbitrary integer."""
+  two: Int
 }
