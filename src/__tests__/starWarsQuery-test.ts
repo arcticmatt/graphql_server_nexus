@@ -1,6 +1,6 @@
 import { GraphQLError, graphql } from "graphql";
 
-import schema from "../starWarsSchema";
+import schema from "../schema/starWarsSchema";
 
 describe("Star Wars Query Tests", () => {
   describe("Custom", () => {

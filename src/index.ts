@@ -1,5 +1,5 @@
 import { ApolloServer } from "apollo-server";
-import starWarsSchema from "./starWarsSchema";
+import starWarsSchema from "./schema/starWarsSchema";
 
 async function main(): Promise<void> {
   // The ApolloServer constructor requires two parameters: your schema
