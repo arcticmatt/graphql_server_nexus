@@ -40,7 +40,7 @@ const Character = interfaceType({
       description: "The name of the character.",
       nullable: true,
     });
-    t.list.field("friends", {
+    t.field("friends", {
       description:
         "The friends of the character, or an empty list if they have none.",
       type: Character,
@@ -50,7 +50,7 @@ const Character = interfaceType({
         return getFriends(character);
       },
     });
-    t.list.field("appearsIn", {
+    t.field("appearsIn", {
       description: "Which movies they appear in.",
       type: Episode,
       list: [false],
